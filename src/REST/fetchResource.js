@@ -1,13 +1,20 @@
-import { axiosInstance } from './networkProvider';
+import { axios } from './networkProvider';
 
 export const loginGet = () => {
-	return axiosInstance('get', 'profile', {});
+	return axios('get', 'profile', {});
 };
 export const loginPost = (body) => {
-	return axiosInstance('post', 'login', {body});
+	return axios('post', 'login', {body});
 };
 
 export const toysGet = () => {
-	return axiosInstance('get', 'toys', {});
+	return axios('get', 'toys', {});
 };
 
+export const transactionsGet = () => {
+	return axios('get', 'transactions', {});
+};
+
+export const categoriesGet = () => {
+	return axios('get', 'categories', {});
+};

@@ -1,7 +1,7 @@
 import { types } from './types';
 
 const initialState = {
-	list: []
+	toysList: []
 };
 
 export const toysReducer = ( state = initialState, action ) => {
@@ -9,7 +9,7 @@ export const toysReducer = ( state = initialState, action ) => {
 		case types.PUT_TOYS:
 			return {
 				...state,
-				list: action.payload.toys
+				toysList: action.payload.toys
 			};
 
 		default:

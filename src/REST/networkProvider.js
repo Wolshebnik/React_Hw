@@ -1,10 +1,10 @@
-import axios from 'axios';
+import Axios from 'axios';
 
-const getLocalStorage = () => {
+export const getLocalStorage = () => {
 	return localStorage.getItem('accessToken')||'';
 };
 
-const instance = axios.create({
+const instance = Axios.create({
 	baseURL: 'http://localhost:8080',
 	headers: {
 		'Authorization': 'Bearer ' + getLocalStorage(),
@@ -13,7 +13,7 @@ const instance = axios.create({
 
 });
 
-export const axiosInstance = async (method, resource, {id = '', body}) => {
+export const axios = async (method, resource, {id = '', body}) => {
 	return instance[method](`/${resource}/${id}`, body);
 };
 

@@ -1,9 +1,12 @@
 import { types } from './types';
+import { getLocalStorage } from '../../REST/networkProvider';
+
+
 
 const initialState = {
 	email: 'user@example.com',
 	password: '1234567890',
-	isAuthenticated: '',
+	isAuthenticated: getLocalStorage(),
 	error: null
 };
 

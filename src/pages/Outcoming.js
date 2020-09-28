@@ -40,16 +40,16 @@ const MyFormLabel = styled( FormLabel )`
 margin-bottom: 20px;
 `;
 
-const Login = () => {
+const OutComing = () => {
 	const dispatch = useDispatch();
-	const {email, password, error} = useSelector( state => state.auth );
+
 	const {isFetching} = useSelector( state => state.ui );
 
 	const classes = useStyles();
 
 	const onSubmit = ( e ) => {
 		e.preventDefault();
-		dispatch( postLoginAsync( {email, password} ) );
+
 	};
 
 	const changeInput = ( e ) => {
@@ -59,37 +59,38 @@ const Login = () => {
 	return (
 		<Container maxWidth='sm'>
 			<Form onSubmit={ onSubmit }>
-				<MyFormLabel align={ 'center' }>Login</MyFormLabel>
-				<TextField
-					className={classes.input}
-					id="email"
-					label="Email"
-					placeholder={ 'user@example.com' }
-					type='email'
-					variant="outlined"
-					value={ email }
-					error={ Boolean( error ) }
-					helperText={ error }
-					onChange={ changeInput }
-				/>
-				<TextField
-					className={classes.input}
-					id="password"
-					label="Password"
-					placeholder={ '1234567890' }
-					type='password'
-					variant="outlined"
-					value={ password }
-					onChange={ changeInput }
-				/>
-					<Button
-						className={classes.button}
-						variant="outlined"
-						color="primary"
-						type={ 'submit' }
-					>{ isFetching ? <LinearBuffer/> : 'LOGIN IN' }</Button>
+			out
+				{/*<MyFormLabel align={ 'center' }>Login</MyFormLabel>*/}
+				{/*<TextField*/}
+				{/*	className={classes.input}*/}
+				{/*	id="email"*/}
+				{/*	label="Email"*/}
+				{/*	placeholder={ 'user@example.com' }*/}
+				{/*	type='email'*/}
+				{/*	variant="outlined"*/}
+				{/*	value={ email }*/}
+				{/*	error={ Boolean( error ) }*/}
+				{/*	helperText={ error }*/}
+				{/*	onChange={ changeInput }*/}
+				{/*/>*/}
+				{/*<TextField*/}
+				{/*	className={classes.input}*/}
+				{/*	id="password"*/}
+				{/*	label="Password"*/}
+				{/*	placeholder={ '1234567890' }*/}
+				{/*	type='password'*/}
+				{/*	variant="outlined"*/}
+				{/*	value={ password }*/}
+				{/*	onChange={ changeInput }*/}
+				{/*/>*/}
+				{/*	<Button*/}
+				{/*		className={classes.button}*/}
+				{/*		variant="outlined"*/}
+				{/*		color="primary"*/}
+				{/*		type={ 'submit' }*/}
+				{/*	>{ isFetching ? <LinearBuffer/> : 'LOGIN IN' }</Button>*/}
 			</Form>
 		</Container>
 	);
 };
-export default Login;
+export default OutComing;

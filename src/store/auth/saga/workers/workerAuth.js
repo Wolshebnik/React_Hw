@@ -10,11 +10,14 @@ export function* workerAuth( action ) {
 		yield put( startFetching );
 		const {data} = yield call( loginPost, body );
 		yield put( putToken( data.accessToken ) );
+		yield put( errorAuthenticate( null ) );
 	}
 	catch (e) {
 		console.log( e.response );
-		yield put( errorAuthenticate( e.response.data.message ) );
-		yield put(logoutAuth)
+		yield put( logoutAuth );
+		if (e.response) {
+			yield put( errorAuthenticate( e.response.data.message ) );
+		}
 	}
 	finally {
 		yield put( stopFetching );

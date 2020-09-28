@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import { changeInputAction, postLoginAsync } from '../store/auth/action';
 import LinearBuffer from '../components/LinearBuffer';
+import { getCategories } from '../store/categories/action';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,56 +41,61 @@ const MyFormLabel = styled( FormLabel )`
 margin-bottom: 20px;
 `;
 
-const Login = () => {
+const Incoming = () => {
 	const dispatch = useDispatch();
-	const {email, password, error} = useSelector( state => state.auth );
+	const {categoriesList} = useSelector( state => state.categories );
 	const {isFetching} = useSelector( state => state.ui );
+	console.log(categoriesList);
 
 	const classes = useStyles();
 
 	const onSubmit = ( e ) => {
 		e.preventDefault();
-		dispatch( postLoginAsync( {email, password} ) );
+
 	};
 
 	const changeInput = ( e ) => {
-		dispatch( changeInputAction( {[e.target.id]: e.target.value} ) );
+		// dispatch( changeInputAction( {[e.target.id]: e.target.value} ) );
+		dispatch( getCategories );
 	};
 
 	return (
 		<Container maxWidth='sm'>
 			<Form onSubmit={ onSubmit }>
-				<MyFormLabel align={ 'center' }>Login</MyFormLabel>
-				<TextField
-					className={classes.input}
-					id="email"
-					label="Email"
-					placeholder={ 'user@example.com' }
-					type='email'
-					variant="outlined"
-					value={ email }
-					error={ Boolean( error ) }
-					helperText={ error }
-					onChange={ changeInput }
-				/>
-				<TextField
-					className={classes.input}
-					id="password"
-					label="Password"
-					placeholder={ '1234567890' }
-					type='password'
-					variant="outlined"
-					value={ password }
-					onChange={ changeInput }
-				/>
+				Hi
+				{/*<MyFormLabel align={ 'center' }>Login</MyFormLabel>*/}
+				{/*<TextField*/}
+				{/*	className={classes.input}*/}
+				{/*	id="email"*/}
+				{/*	label="Email"*/}
+				{/*	placeholder={ 'user@example.com' }*/}
+				{/*	type='email'*/}
+				{/*	variant="outlined"*/}
+				{/*	value={ email }*/}
+				{/*	error={ Boolean( error ) }*/}
+				{/*	helperText={ error }*/}
+				{/*	onChange={ changeInput }*/}
+				{/*/>*/}
+				{/*<TextField*/}
+				{/*	className={classes.input}*/}
+				{/*	id="password"*/}
+				{/*	label="Password"*/}
+				{/*	placeholder={ '1234567890' }*/}
+				{/*	type='password'*/}
+				{/*	variant="outlined"*/}
+				{/*	value={ password }*/}
+				{/*	onChange={ changeInput }*/}
+				{/*/>*/}
 					<Button
 						className={classes.button}
 						variant="outlined"
 						color="primary"
 						type={ 'submit' }
-					>{ isFetching ? <LinearBuffer/> : 'LOGIN IN' }</Button>
+					onClick={changeInput}
+					>
+				{ isFetching ? <LinearBuffer/> : 'LOGIN IN' }</Button>
 			</Form>
 		</Container>
 	);
 };
-export default Login;
+export default Incoming;
