@@ -1,7 +1,7 @@
 import { types } from './types';
 
 export const changeInputAction = ( input ) => ({
-	type: types.CHANGE_INPUT,
+	type: types.CHANGE_INPUT_AUTH,
 	payload: input
 });
 

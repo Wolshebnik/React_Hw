@@ -12,7 +12,7 @@ const initialState = {
 
 export const authReducer = ( state = initialState, action ) => {
 	switch (action.type) {
-		case types.CHANGE_INPUT:
+		case types.CHANGE_INPUT_AUTH:
 			return {
 				...state,
 				...action.payload

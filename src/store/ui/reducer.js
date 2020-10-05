@@ -1,10 +1,16 @@
 import { types } from './types';
 
 const initialState = {
-	isFetching: false
+	isFetching: false,
+	modal: false,
+	errorModal: {
+		title: '',
+		text: ''
+	}
+
 };
 
-export const uiReducer = (state = initialState, action) => {
+export const uiReducer = ( state = initialState, action ) => {
 	switch (action.type) {
 		case types.START_FETCHING:
 			return {
@@ -18,6 +24,28 @@ export const uiReducer = (state = initialState, action) => {
 				isFetching: false
 			};
 
+		case types.MODAL_OPEN:
+			return {
+				...state,
+				modal: true
+			};
+
+		case types.MODAL_CLOSE:
+			return {
+				...state,
+				modal: false,
+				errorModal: {
+					title: '',
+					text: ''
+				}
+			};
+
+		case types.MODAL_ERROR:
+			return {
+				...state,
+				errorModal: action.payload,
+
+			};
 		default:
 			return state;
 	}
