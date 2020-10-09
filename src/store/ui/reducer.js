@@ -6,7 +6,8 @@ const initialState = {
 	errorModal: {
 		title: '',
 		text: ''
-	}
+	},
+	permission: false
 
 };
 
@@ -44,6 +45,13 @@ export const uiReducer = ( state = initialState, action ) => {
 			return {
 				...state,
 				errorModal: action.payload,
+
+			};
+
+		case types.PERMISSION_TO_MOVE:
+			return {
+				...state,
+				permission : action.payload,
 
 			};
 		default:

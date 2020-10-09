@@ -24,7 +24,7 @@ import TransitionsModal from '../components/popup';
 import { createArrayForPostTransaction, findCategoryByName } from '../Utilities';
 import { errorsModal, openModal } from '../store/ui/action';
 
-const useStyles = makeStyles( ( ) => ({
+const useStyles = makeStyles( () => ({
 	table: {
 		minWidth: 650
 
@@ -61,9 +61,11 @@ const AddTransaction = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	let history = useHistory();
+
 	const {toysList} = useSelector( state => state.products );
 	const {isFetching} = useSelector( state => state.ui );
-	const [ select, setSelect ] = useState( {toySelect:'', transSelect:''} );
+
+	const [ select, setSelect ] = useState( {toySelect: '', transSelect: ''} );
 	const [ transactionField, setTransactionField ] = useState( {
 		id: '', name: '', quantity: 0, price: 0, description: '', totalCost: 0, category: {}
 	} );
@@ -81,21 +83,21 @@ const AddTransaction = () => {
 		} ) );
 	};
 
-
-
 	const handleChangeSelectToy = ( event ) => {
 		const categoryByName = findCategoryByName( toysList, event.target.value );
 		categoryByName.quantity = 0;
 		categoryByName.totalCost = 0;
 		setSelect( {
 			...select,
-			toySelect:event.target.value} );
-		setTransactionField( categoryByName);
+			toySelect: event.target.value
+		} );
+		setTransactionField( categoryByName );
 	};
-	const handleChangeSelectTransactions= ( event ) => {
+	const handleChangeSelectTransactions = ( event ) => {
 		setSelect( {
 			...select,
-			transSelect:event.target.value});
+			transSelect: event.target.value
+		} );
 	};
 
 	const changeInput = ( e ) => {
@@ -111,18 +113,18 @@ const AddTransaction = () => {
 			showError( 'Тhe field cannot be empty' );
 			return;
 		}
-		setSelect( {...select, toySelect:''})
-		setTransactionField({id: '', name: '', quantity: 0, price: 0, description: '', totalCost: 0, category: {}})
+		setSelect( {...select, toySelect: ''} );
+		setTransactionField( {id: '', name: '', quantity: 0, price: 0, description: '', totalCost: 0, category: {}} );
 		setTransactionsLocal( [
 			...transactionsLocal,
 			transactionField
 		] );
 	};
 
-	const removeTransactionFromTable = (id) =>{
-		const list = transactionsLocal.filter(trans => trans.id !== id)
-		setTransactionsLocal(list)
-	}
+	const removeTransactionFromTable = ( id ) => {
+		const list = transactionsLocal.filter( trans => trans.id !== id );
+		setTransactionsLocal( list );
+	};
 
 	const onSubmit = ( e ) => {
 		e.preventDefault();
@@ -130,19 +132,18 @@ const AddTransaction = () => {
 			showError( 'Transaction type must not be empty' );
 			return;
 		}
-		if(!transactionsLocal.length) {
+		if (!transactionsLocal.length) {
 			showError( 'Add at least one transaction' );
 			return;
 		}
-		const newTransaction = createArrayForPostTransaction(transactionsLocal)
-		const body = {toys:newTransaction, type: select.transSelect}
-		dispatch(postTransactions (body))
-		setSelect({
+		const newTransaction = createArrayForPostTransaction( transactionsLocal );
+		const body = {toys: newTransaction, type: select.transSelect};
+		dispatch( postTransactions( body ) );
+		setSelect( {
 			...select,
 			transSelect: ''
-		})
-		setTransactionsLocal([])
-		history.push('/dashboard')
+		} );
+		setTransactionsLocal( [] );
 
 	};
 
@@ -224,7 +225,8 @@ const AddTransaction = () => {
 										{ row.description }
 									</TableCell>
 									<TableCell className={ classes.tableCell } align="right">
-										<Button variant="outlined" color={ 'secondary' } size="medium" onClick={() => removeTransactionFromTable(row.id)}>
+										<Button variant="outlined" color={ 'secondary' } size="medium"
+											onClick={ () => removeTransactionFromTable( row.id ) }>
 											del
 										</Button>
 									</TableCell>
@@ -245,18 +247,18 @@ const AddTransaction = () => {
 			>
 				<Grid item xs={ 12 }>
 					Type transactions <Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
-						label='Select trans'
-						color={ 'primary' }
-						value={ select.transSelect }
-						className={ classes.tableCell }
-						onChange={handleChangeSelectTransactions}
-					>
-							<MenuItem  value={ 'incoming'} >incoming</MenuItem>
-							<MenuItem  value={ 'outcoming'}>outcoming</MenuItem>
+					labelId="demo-simple-select-label"
+					id="demo-simple-select"
+					label='Select trans'
+					color={ 'primary' }
+					value={ select.transSelect }
+					className={ classes.tableCell }
+					onChange={ handleChangeSelectTransactions }
+				>
+					<MenuItem value={ 'incoming' }>incoming</MenuItem>
+					<MenuItem value={ 'outcoming' }>outcoming</MenuItem>
 
-					</Select>
+				</Select>
 
 				</Grid>
 				<Grid item xs={ 12 }>

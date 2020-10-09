@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { errorsModal, openModal, startFetching, stopFetching } from '../../../ui/action';
+import { errorsModal, openModal, permissionToMove, startFetching, stopFetching } from '../../../ui/action';
 import { transactionsGet, transactionsGetId, transactionsPost } from '../../../../REST/fetchResource';
 import { putTransactions, putTransactionsId } from '../../action';
 
@@ -48,8 +48,8 @@ export function* workerGetTransactionsId(action) {
 export function* workerPostTransactions(action) {
 	try {
 
-		const {data} = yield call( transactionsPost, action.payload );
-		console.log(data);
+		yield call( transactionsPost, action.payload );
+		yield put (permissionToMove(true))
 
 	}
 	catch (e) {
@@ -61,6 +61,7 @@ export function* workerPostTransactions(action) {
 				text: e.response.data.message
 			} ) );
 		}
+		yield put (permissionToMove(false))
 	}
 	finally {
 

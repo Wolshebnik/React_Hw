@@ -15,8 +15,12 @@ export const closeModal = ({
 	type: types.MODAL_CLOSE
 });
 
-export const errorsModal = (error) => ({
-	type:types.MODAL_ERROR,
+export const errorsModal = ( error ) => ({
+	type: types.MODAL_ERROR,
 	payload: error
+});
 
-})
+export const permissionToMove = ( toMove ) => ({
+	type: types.PERMISSION_TO_MOVE,
+	payload: toMove
+});
